@@ -15,8 +15,8 @@ if ! command -v node &> /dev/null; then
   wait
 fi
 
-echo 'Please install Github Desktop: https://desktop.github.com/'
-wait
+echo 'You have installed all needed programs. Press enter to start setup...'
+read
 
 cd ai
 echo 'Setting up python virtual environment...'
