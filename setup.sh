@@ -5,7 +5,7 @@ wait() {
   read
 }
 
-if ! command -v python &> /dev/null; then
+if ! command -v python &> /dev/null || ! command -v pip &> /dev/null; then
   echo 'Please install: https://www.python.org/downloads/'
   wait
 fi
