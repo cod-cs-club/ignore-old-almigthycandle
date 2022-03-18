@@ -38,3 +38,6 @@ echo 'Done setting up AI!'
 echo 'Setting up nodejs environment...'
 cd ../web
 npm install
+
+echo 'Done! press enter to exit.'
+read
