@@ -11,10 +11,11 @@ from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, LSTM
 
+from flask import Flask
 
-def print_hi(from_dimitri):
-    print(f'Hi, {from_dimitri}')
+app = Flask(__name__)
 
+@app.route("/")
+def hello_world():
+    return "<p>Hello, World!</p>"
 
-if __name__ == '__main__':
-    print_hi("What's up CS Club Homies. Let's get freaky.")
