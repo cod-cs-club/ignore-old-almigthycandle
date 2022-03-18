@@ -23,6 +23,8 @@ echo 'Setting up python virtual environment...'
 python -m venv --system-site-packages venv
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   source venv/bin/activate
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  source venv/bin/activate
 else
   .\\venv\\Scripts\\activate
 fi
