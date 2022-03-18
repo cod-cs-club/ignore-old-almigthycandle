@@ -24,7 +24,7 @@ python -m venv --system-site-packages venv
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   source venv/bin/activate
 else
-  .\venv\Scripts\activate
+  .\\venv\\Scripts\\activate
 fi
 
 echo 'Upgrading pip...'
