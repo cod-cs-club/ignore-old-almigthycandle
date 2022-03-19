@@ -1,0 +1,18 @@
+Github desktop
++ almightycandle
+
+repository url or github username and repository
+(hubot/cool-repo)
+
+ https://github.com/cod-cs-club/almigthycandle
+
+local path
+C:\Users\jbyhr\Documents\GitHub
+
+cloned repository for web hosted proj on 3.19.2022 @10:14 AM
+
+-----------------------------------------------------------------
+
+npm ERR! enoent ENOENT: no such file or directory, open 'C:\Users\jbyhr\package.json'
+
+'C:\Users\jbyhr\package.json'
