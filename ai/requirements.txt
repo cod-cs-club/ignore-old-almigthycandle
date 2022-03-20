@@ -6,4 +6,5 @@ sklearn
 tensorflow
 keras
 flask
+yfinance
 
