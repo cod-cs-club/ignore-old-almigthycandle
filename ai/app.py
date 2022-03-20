@@ -8,8 +8,10 @@ import pandas_datareader as web
 import datetime as dt
 
 from sklearn.preprocessing import MinMaxScaler
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Dropout, LSTM
+
+import tensorflow as tf
+from keras.models import Sequential
+from keras.layers import Dense, Dropout, LSTM
 
 from flask import Flask
 
