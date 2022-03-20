@@ -19,4 +19,4 @@ def print_hi(from_dimitri):
 
 
 if __name__ == '__main__':
-    print_hi("What's up CS Club Homies. Let's get freaky.")
+    print_hi("Whats up CS Club!  Howdy, boys.  Lets get Rowdy.")
