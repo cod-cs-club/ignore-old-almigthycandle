@@ -1,0 +1,15 @@
+#accuracy-container {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+#accuracy-container h5 {
+    margin: 0;
+    padding: 0;
+    font-size: 50px;
+    font-weight: normal;
+    text-align: center;
+    letter-spacing: 3px;
+}

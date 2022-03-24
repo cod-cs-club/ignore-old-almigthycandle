@@ -5,9 +5,9 @@ import ReactDOM from "react-dom"
 // Import our custom React components and any other files.
 import Header from "./components/Header/Header"
 import Chart from "./components/Chart/Chart"
+import PredictionsContainer from "./components/PredictionsContainer/PredictionsContainer"
 import { getData } from "./utils"
 import "./index.css"
-import PredictionsTable from "./components/PredictionsTable/PredictionsTable"
 
 // Get random data (for now) for stock chart.
 class ChartComponent extends React.Component {
@@ -24,10 +24,10 @@ class ChartComponent extends React.Component {
 
 // Render the app components.
 ReactDOM.render(
-  <>
-    <Header />
-    <ChartComponent />
-	<PredictionsTable />
-  </>,
-  document.querySelector("#root")
+	<>
+	  	<Header />
+	  	<ChartComponent stockID="TRCY" stockCompany="TOTALLY REAL COMPANY" />
+	  	<PredictionsContainer accuracy={Math.floor(Math.random() * 100)} />
+	</>,
+	document.querySelector("#root")
 )

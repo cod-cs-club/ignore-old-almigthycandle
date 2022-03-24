@@ -30,13 +30,31 @@ header #header-title img {
   transform: translate(0, 3px); /* Temp uneven fix */
 }
 
-header input {
+header #header-search {
+  margin: 0;
+  padding: 0;
+}
+
+header #header-search input {
   margin: auto 0;
   padding: 5px 15px;
   font-size: 24px;
-  color: white;
+  color: rgb(256, 256, 256);
   background-color: rgb(124, 124, 124);
+  border: none;
   border-radius: 2em;
+}
+
+header #header-search input:focus {
+  outline: 2px solid rgb(160, 196, 255);
+}
+
+header #header-search img {
+  width: 30px;
+  height: 30px;
+  margin-left: -40px;
+  padding: 0;
+  transform: translate(0, 5px);
 }
 
 header button {

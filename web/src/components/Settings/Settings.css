@@ -7,11 +7,12 @@
     margin: 0;
     padding: 0;
     background-color: rgba(0, 0, 0, 0.8);
+    cursor: no-drop;
     z-index: 100;
 }
 
 #settings-container {
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -21,6 +22,7 @@
     padding: 0;
     background-color: rgb(256, 256, 256);
     border-radius: 10px;
+    cursor: auto;
 }
 
 #settings-container h2 {

@@ -150,7 +150,10 @@ class CandleStickChartPanToLoadMore extends React.Component {
 		const { data, ema26, ema12, macdCalculator, smaVolume50, xScale, xAccessor, displayXAccessor } = this.state
 
 		return (
+			<>
+			
 			<div id="chart-container">
+			<h2>TRCY - TOTALLY REAL COMPANY</h2>
 			<ChartCanvas ratio={ratio} width={850} height={450}
 					margin={{ left: 70, right: 70, top: 20, bottom: 30 }} type={type}
 					seriesName="MSFT"
@@ -238,6 +241,7 @@ class CandleStickChartPanToLoadMore extends React.Component {
 				<CrossHairCursor />
 			</ChartCanvas>
 			</div>
+			</>
 		)
 	}
 }

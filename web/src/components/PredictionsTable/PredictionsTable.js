@@ -3,7 +3,7 @@ import './PredictionsTable.css';
 const PredictionsTable = () => {
     return(
         <><div id="table">
-            <div>AI Predictions:</div>
+            <h4>AI PREDICTIONS</h4>
             <div class="flex-container">
                 <div class="flex-items">
                     Short Term:
