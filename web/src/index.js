@@ -7,6 +7,7 @@ import Header from "./components/Header/Header"
 import Chart from "./components/Chart/Chart"
 import { getData } from "./utils"
 import "./index.css"
+import PredictionsTable from "./components/PredictionsTable/PredictionsTable"
 
 // Get random data (for now) for stock chart.
 class ChartComponent extends React.Component {
@@ -26,6 +27,7 @@ ReactDOM.render(
   <>
     <Header />
     <ChartComponent />
+	<PredictionsTable />
   </>,
   document.querySelector("#root")
 )
