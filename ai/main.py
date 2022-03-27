@@ -55,7 +55,7 @@ model.fit(x_train, y_train, epochs=25, batch_size=56)
 
 #load test data
 test_start=dt.datetime(2022,1,1)
-test_end=dt.datetime(2022,3,27)
+test_end=dt.datetime.now()
 
 test_data = web.DataReader(company, 'yahoo', test_start, test_end)
 actual_prices = test_data['Close'].values
