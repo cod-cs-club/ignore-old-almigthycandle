@@ -20,7 +20,7 @@ from keras.layers import Dense, Dropout, LSTM
 #get 1 years worth of data for Apple
 company = 'AAPL'
 start = dt.datetime(2016,1,1)
-end = dt.datetime(2022,1,1)
+end = dt.datetime(2021,1,1)
 data = web.DataReader(company, 'yahoo', start, end)
 prediction_days = 60
 scaler = MinMaxScaler(feature_range=(0,1))
@@ -54,7 +54,7 @@ model.compile(optimizer='adam', loss='mean_squared_error')
 model.fit(x_train, y_train, epochs=25, batch_size=56)
 
 #load test data
-test_start=dt.datetime(2022,1,1)
+test_start=dt.datetime(2021,1,1)
 test_end=dt.datetime.now()
 
 test_data = web.DataReader(company, 'yahoo', test_start, test_end)
@@ -86,6 +86,13 @@ plt.xlabel('Time')
 plt.ylabel(f'{company} Share Price')
 plt.legend()
 plt.show()
+
+real_data = [model_inputs[len(model_inputs) + 1 - prediction_days:len(model_inputs+1), 0]]
+real_data = np.array(real_data)
+real_data = np.reshape(real_data, (real_data.shape[0], real_data.shape[1], 1))
+prediction = model.predict(real_data)
+prediction = scaler.inverse_transform(prediction)
+print (f"Prediction: {prediction}")
 
 def print_hi(from_dimitri):
     print(f'Hi, {from_dimitri}')
