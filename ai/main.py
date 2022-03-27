@@ -68,10 +68,12 @@ model_inputs = scaler.transform(model_inputs)
 
 #Make predicition on Test Data
 x_test = []
+
 for x in range(prediction_days,len(model_inputs)):
     x_test.append(model_inputs[x-prediction_days:x, 0])
+
 x_test = np.array(x_test)
-x_test = np.reshape(x_test, (x_test.shape[0], x_test.shape[1]), 1)
+x_test = np.reshape(x_test, (x_test.shape[0], x_test.shape[1], 1))
 predicted_prices = model.predict(x_test)
 predicted_prices = scaler.inverse_transform(predicted_prices)
 
