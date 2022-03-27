@@ -15,11 +15,15 @@ import tensorflow as tf
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, LSTM
 
-df_yahoo = yf.download('AAPL',
-start='2022-01-01',
-end='2022-03-26',
-progress=False, auto_adjust=True)
-
+stock_info = yf.Ticker('AAPL').info
+market_price = stock_info['regularMarketPrice']
+previous_close_price = stock_info['regularMarketPreviousClose']
+aaple = yf.Ticker("AAPL")
+prices = aaple.history(period="1y")
+prices['20d'] = prices['Close'].rolling(20).mean() #finds averages for 20 day mark for apple stock
+prices['200d'] = prices['Close'].rolling(200).mean()
+prices[['Close', '20d', '200d']].plot()
+plt.title('Moving Averages Apple')
 
 def print_hi(from_dimitri):
     print(f'Hi, {from_dimitri}')
@@ -27,4 +31,5 @@ def print_hi(from_dimitri):
 
 if __name__ == '__main__':
     print_hi("Whats up CS Club!  Howdy, boys.  Lets get Rowdy.")
-    print_hi(df_yahoo)
+    print(prices)
+
