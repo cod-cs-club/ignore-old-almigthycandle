@@ -1,6 +1,11 @@
 # YT Video: https://www.youtube.com/watch?v=PuZY9q-aKLw&t=957s&ab_channel=NeuralNine
 # Imports for our Projects
 
+#Version 0.1.5
+#Updated duration of each Epoch, time of study for AI, 
+#WARNING: Time of each Epoch is approximately 30+ seconds, this increases accuracy of prediction
+#As time elapses the more information is learned. Will experiment with extending in the future.
+
 from audioop import minmax
 from tracemalloc import start
 import numpy as np
@@ -19,13 +24,13 @@ from keras.layers import Dense, Dropout, LSTM
 
 #get 1 years worth of data for Apple
 company = 'AAPL'
-start = dt.datetime(2012,1,1)
-end = dt.datetime(2020,1,1)
+start = dt.datetime(1998,1,1)
+end = dt.datetime(2019,1,1)
 data = web.DataReader(company, 'yahoo', start, end)
-prediction_days = 60
+prediction_days = 90
 scaler = MinMaxScaler(feature_range=(0,1))
 now = dt.datetime.now()
-
+ 
 #prepare data
 
 scaled_data = scaler.fit_transform(data['Close'].values.reshape(-1,1))
@@ -42,19 +47,19 @@ x_train = np.reshape(x_train, (x_train.shape[0], x_train.shape[1], 1))
 
 # Build Model
 model = tf.keras.Sequential()
-model.add(LSTM(units=(50), return_sequences=True, input_shape=(x_train.shape[1], 1)))
-model.add(Dropout(0.2))
-model.add(LSTM(units=50, return_sequences=True))
-model.add(Dropout(0.2))
-model.add(LSTM(units=50))
-model.add(Dropout(0.2))
+model.add(LSTM(units=(150), return_sequences=True, input_shape=(x_train.shape[1], 1)))
+model.add(Dropout(0.35))
+model.add(LSTM(units=150, return_sequences=True))
+model.add(Dropout(0.35))
+model.add(LSTM(units=150))
+model.add(Dropout(0.35))
 model.add(Dense(units=1)) #Predicition of the next close
 
 model.compile(optimizer='adam', loss='mean_squared_error')
 model.fit(x_train, y_train, epochs=25, batch_size=56)
 
 #load test data
-test_start=dt.datetime(2020,1,1)
+test_start=dt.datetime(2019,1,1)
 test_end=dt.datetime.now()
 
 test_data = web.DataReader(company, 'yahoo', test_start, test_end)
