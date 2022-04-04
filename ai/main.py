@@ -27,7 +27,7 @@ company = 'AAPL'
 start = dt.datetime(1998,1,1)
 end = dt.datetime(2019,1,1)
 data = web.DataReader(company, 'yahoo', start, end)
-prediction_days = 90
+prediction_days = 120
 scaler = MinMaxScaler(feature_range=(0,1))
 now = dt.datetime.now()
  
@@ -45,19 +45,22 @@ for x in range(prediction_days, len(scaled_data)):
 x_train, y_train = np.array(x_train), np.array(y_train)
 x_train = np.reshape(x_train, (x_train.shape[0], x_train.shape[1], 1))
 
-# Build Model
+# Construction of the AI model:
+# Where model is the representation of the AI itself
 model = tf.keras.Sequential()
-model.add(LSTM(units=(150), return_sequences=True, input_shape=(x_train.shape[1], 1)))
-model.add(Dropout(0.35))
-model.add(LSTM(units=150, return_sequences=True))
-model.add(Dropout(0.35))
-model.add(LSTM(units=150))
-model.add(Dropout(0.35))
+model.add(LSTM(units=(128), return_sequences=True, input_shape=(x_train.shape[1], 1)))
+model.add(Dropout(0.25))
+model.add(LSTM(units=128, return_sequences=True))
+model.add(Dropout(0.25))
+model.add(LSTM(units=128))
+model.add(Dropout(0.25))
 model.add(Dense(units=1)) #Predicition of the next close
 
+#Training starts here, runs for 25 epochs
+#Each epoch is defined by model specifications above, can be modified to increase accuracy
 model.compile(optimizer='adam', loss='mean_squared_error')
 model.fit(x_train, y_train, epochs=25, batch_size=56)
-
+print("Training is complete!")
 #load test data
 test_start=dt.datetime(2019,1,1)
 test_end=dt.datetime.now()
