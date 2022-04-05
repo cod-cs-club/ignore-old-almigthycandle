@@ -9,7 +9,7 @@ function PredictionsContainer(props) {
 
     return (
         <section id="predictions-container">
-            <PredictionsTable data={props} />
+            <div><PredictionsTable data={props} /></div>
             <PredictionsAccuracy data={props} />
         </section>
     )

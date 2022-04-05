@@ -25,9 +25,11 @@ class ChartComponent extends React.Component {
 // Render the app components.
 ReactDOM.render(
 	<>
-	  	<Header />
-	  	<ChartComponent stockID="TRCY" stockCompany="TOTALLY REAL COMPANY" />
-	  	<PredictionsContainer accuracy={Math.floor(Math.random() * 100)} />
+		<Header />
+		<div id="container">
+			<ChartComponent stockID="TRCY" stockCompany="TOTALLY REAL COMPANY" />
+			<PredictionsContainer accuracy={Math.floor(Math.random() * 100)} />
+		</div>
 	</>,
 	document.querySelector("#root")
 )

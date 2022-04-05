@@ -1,19 +1,23 @@
 
 .flex-container {
-    display: inline-flex;
+    display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: stretch;
     align-content: normal;
     border: 1px solid black;
-  }
- 
-.flex-items{
-    width:auto;
+}
+
+
+.flex-items > *{
+    flex-basis: 100%;
 }
  
 #table{
     font-size: 20px;
 }
 
+img{
+    width:5%;
+    height:auto;
+
+}

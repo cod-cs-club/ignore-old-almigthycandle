@@ -7,3 +7,12 @@ body {
   padding: 0;
   background-color: rgb(216, 216, 216);
 }
+
+* {
+  box-sizing: border-box;
+ }
+
+ #container{
+   display:flex; 
+   flex-direction:row;
+}
