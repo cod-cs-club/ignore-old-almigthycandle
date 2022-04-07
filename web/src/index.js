@@ -5,6 +5,7 @@ import ReactDOM from "react-dom"
 // Import our custom React components and any other files.
 import Header from "./components/Header/Header"
 import Chart from "./components/Chart/Chart"
+import Footer from "./components/Footer/Footer"
 import PredictionsContainer from "./components/PredictionsContainer/PredictionsContainer"
 import { getData } from "./utils"
 import "./index.css"
@@ -30,6 +31,7 @@ ReactDOM.render(
 			<ChartComponent stockID="TRCY" stockCompany="TOTALLY REAL COMPANY" />
 			<PredictionsContainer accuracy={Math.floor(Math.random() * 100)} />
 		</div>
+		<Footer />
 	</>,
 	document.querySelector("#root")
 )
