@@ -6,5 +6,6 @@ sklearn
 tensorflow
 keras
 flask
+flask_cors
 yfinance
 

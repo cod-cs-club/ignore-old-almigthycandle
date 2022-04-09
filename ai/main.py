@@ -22,92 +22,101 @@ import tensorflow as tf
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, LSTM
 
-#get 1 years worth of data for Apple
-company = 'AAPL'
-start = dt.datetime(1998,1,1)
-end = dt.datetime(2019,1,1)
-data = web.DataReader(company, 'yahoo', start, end)
-prediction_days = 120
-scaler = MinMaxScaler(feature_range=(0,1))
-now = dt.datetime.now()
- 
-#prepare data
+def predict_future_prices(company):
+    # this function needs to be changed to return a "real" AI prediction
 
-scaled_data = scaler.fit_transform(data['Close'].values.reshape(-1,1))
+    # this code is generating random data, and it is *just an example*
+    LENGTH = 10
+    time_index = pd.date_range(dt.datetime.now(), periods=LENGTH, freq='D')
+    fake_prices = np.random.randint(10, size=10)
+    fake_data = pd.DataFrame(fake_prices, index=time_index, columns=['price'])
+    return fake_data
 
-x_train = []
-y_train = []
 
-for x in range(prediction_days, len(scaled_data)):
-    x_train.append(scaled_data[x-prediction_days:x, 0])
-    y_train.append(scaled_data[x, 0])
+def main():
+    #get 1 years worth of data for Apple
+    company = 'AAPL'
+    start = dt.datetime(1998,1,1)
+    end = dt.datetime(2019,1,1)
+    data = web.DataReader(company, 'yahoo', start, end)
+    prediction_days = 120
+    scaler = MinMaxScaler(feature_range=(0,1))
+    now = dt.datetime.now()
+     
+    #prepare data
 
-x_train, y_train = np.array(x_train), np.array(y_train)
-x_train = np.reshape(x_train, (x_train.shape[0], x_train.shape[1], 1))
+    scaled_data = scaler.fit_transform(data['Close'].values.reshape(-1,1))
 
-# Construction of the AI model:
-# Where model is the representation of the AI itself
-model = tf.keras.Sequential()
-model.add(LSTM(units=(128), return_sequences=True, input_shape=(x_train.shape[1], 1)))
-model.add(Dropout(0.25))
-model.add(LSTM(units=128, return_sequences=True))
-model.add(Dropout(0.25))
-model.add(LSTM(units=128))
-model.add(Dropout(0.25))
-model.add(Dense(units=1)) #Predicition of the next close
+    x_train = []
+    y_train = []
 
-#Training starts here, runs for 25 epochs
-#Each epoch is defined by model specifications above, can be modified to increase accuracy
-model.compile(optimizer='adam', loss='mean_squared_error')
-model.fit(x_train, y_train, epochs=25, batch_size=56)
-print("Training is complete!")
-#load test data
-test_start=dt.datetime(2019,1,1)
-test_end=dt.datetime.now()
+    for x in range(prediction_days, len(scaled_data)):
+        x_train.append(scaled_data[x-prediction_days:x, 0])
+        y_train.append(scaled_data[x, 0])
 
-test_data = web.DataReader(company, 'yahoo', test_start, test_end)
-actual_prices = test_data['Close'].values
+    x_train, y_train = np.array(x_train), np.array(y_train)
+    x_train = np.reshape(x_train, (x_train.shape[0], x_train.shape[1], 1))
 
-total_dataset = pd.concat((data['Close'], test_data['Close']), axis=0)
+    # Construction of the AI model:
+    # Where model is the representation of the AI itself
+    model = tf.keras.Sequential()
+    model.add(LSTM(units=(128), return_sequences=True, input_shape=(x_train.shape[1], 1)))
+    model.add(Dropout(0.25))
+    model.add(LSTM(units=128, return_sequences=True))
+    model.add(Dropout(0.25))
+    model.add(LSTM(units=128))
+    model.add(Dropout(0.25))
+    model.add(Dense(units=1)) #Predicition of the next close
 
-model_inputs = total_dataset[len(total_dataset) - len(test_data) - prediction_days:].values
-model_inputs = model_inputs.reshape(-1,1)
-model_inputs = scaler.transform(model_inputs)
+    #Training starts here, runs for 25 epochs
+    #Each epoch is defined by model specifications above, can be modified to increase accuracy
+    model.compile(optimizer='adam', loss='mean_squared_error')
+    model.fit(x_train, y_train, epochs=25, batch_size=56)
+    print("Training is complete!")
+    #load test data
+    test_start=dt.datetime(2019,1,1)
+    test_end=dt.datetime.now()
 
-#Make predicition on Test Data
-x_test = []
+    test_data = web.DataReader(company, 'yahoo', test_start, test_end)
+    actual_prices = test_data['Close'].values
 
-for x in range(prediction_days,len(model_inputs)):
-    x_test.append(model_inputs[x-prediction_days:x, 0])
+    total_dataset = pd.concat((data['Close'], test_data['Close']), axis=0)
 
-x_test = np.array(x_test)
-x_test = np.reshape(x_test, (x_test.shape[0], x_test.shape[1], 1))
-predicted_prices = model.predict(x_test)
-predicted_prices = scaler.inverse_transform(predicted_prices)
+    model_inputs = total_dataset[len(total_dataset) - len(test_data) - prediction_days:].values
+    model_inputs = model_inputs.reshape(-1,1)
+    model_inputs = scaler.transform(model_inputs)
 
-#Plot the test prediction
+    #Make predicition on Test Data
+    x_test = []
 
-plt.plot(actual_prices, color="black", label=f"Actual {company} Price")
-plt.plot(predicted_prices, color="green", label=f"Predicted {company} Price")
-plt.title(f"{company} Share Price")
-plt.xlabel('Time')
-plt.ylabel(f'{company} Share Price')
-plt.legend()
-plt.show()
+    for x in range(prediction_days,len(model_inputs)):
+        x_test.append(model_inputs[x-prediction_days:x, 0])
 
-real_data = [model_inputs[len(model_inputs) + 1 - prediction_days:len(model_inputs+1), 0]]
-real_data = np.array(real_data)
-real_data = np.reshape(real_data, (real_data.shape[0], real_data.shape[1], 1))
-prediction = model.predict(real_data)
-prediction = scaler.inverse_transform(prediction)
-print (f"Prediction: {prediction}")
+    x_test = np.array(x_test)
+    x_test = np.reshape(x_test, (x_test.shape[0], x_test.shape[1], 1))
+    predicted_prices = model.predict(x_test)
+    predicted_prices = scaler.inverse_transform(predicted_prices)
 
-def print_hi(from_dimitri):
-    print(f'Hi, {from_dimitri}')
+    #Plot the test prediction
+
+    plt.plot(actual_prices, color="black", label=f"Actual {company} Price")
+    plt.plot(predicted_prices, color="green", label=f"Predicted {company} Price")
+    plt.title(f"{company} Share Price")
+    plt.xlabel('Time')
+    plt.ylabel(f'{company} Share Price')
+    plt.legend()
+    plt.show()
+
+    real_data = [model_inputs[len(model_inputs) + 1 - prediction_days:len(model_inputs+1), 0]]
+    real_data = np.array(real_data)
+    real_data = np.reshape(real_data, (real_data.shape[0], real_data.shape[1], 1))
+    prediction = model.predict(real_data)
+    prediction = scaler.inverse_transform(prediction)
+    print (f"Prediction: {prediction}")
 
 
 if __name__ == '__main__':
-    print_hi("Whats up CS Club!  Howdy, boys.  Lets get Rowdy.")
+    main()
     
     
 

@@ -1,30 +1,24 @@
 import './PredictionsTable.css';
+import { useState, useEffect } from 'react';
 
  
 const PredictionsTable = () => {
+    const endpoint = "http://localhost:5000/predict-future-price?symbol=MSFT"
+    const [prices, setPrices] = useState({});
+    useEffect(() => {
+      fetch(endpoint)
+        .then((res) => res.json())
+        .then((data) => setPrices(data))
+    }, [])
     return(
         <><div id="table">
-            
             <h4>AI PREDICTIONS</h4>
             <div class="flex-container">
                 <div class="flex-items">
-                    Short Term:
+                    AI Predictions (from <a href={endpoint}>{endpoint}</a>):
                     <img class="arrowImg" src="/greenArrow.png" alt="green-arrow"></img>
-                    <div>2w-6w</div>
-                </div>
-            </div>
-            <div class="flex-container">
-                <div class="flex-items">
-                    Mid Term:
-                    <img class="arrowImg" src="/greenArrow.png" alt="green-arrow"></img>
-                    <div>6w-9m</div>
-                </div>
-            </div>
-            <div class="flex-container">
-                <div class="flex-items">
-                    Long Term:
-                    <img class="arrowImg" src="/redArrow.png" alt="red-arrow"></img>
-                    <div>9m+</div>
+                    <h3>Prices:</h3>
+                    <div>{JSON.stringify(prices)}</div>
                 </div>
             </div>
         </div></>
