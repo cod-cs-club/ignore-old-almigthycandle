@@ -1,37 +1,46 @@
 // Import React.
-import React from "react"
+import React, { useState, useEffect } from "react"
 import ReactDOM from "react-dom"
 
 // Import our custom React components and any other files.
 import Header from "./components/Header/Header"
-import Chart from "./components/Chart/Chart"
-import Footer from "./components/Footer/Footer"
-import PredictionsContainer from "./components/PredictionsContainer/PredictionsContainer"
-import { getData } from "./utils"
+import Intro from "./components/Intro/Intro"
+import StockChart from "./components/StockChart/StockChart"
+import StockInfo from "./components/StockInfo/StockInfo"
+import StockLoading from "./components/StockLoading/StockLoading"
 import "./index.css"
 
-// Get random data (for now) for stock chart.
-class ChartComponent extends React.Component {
-	componentDidMount() {
-		getData().then(data => {
-			this.setState({ data })
-		})
+// Main app component.
+function App() {
+	const [stockData, setStockData] = useState()
+
+	// Fetch stock data from python backend, then run the set state function.
+	function fetchStock(search) {
+		console.log(`Fetching stock for: ${search}`)
+		fetch(`http://localhost:5000/predict-future-price?symbol=${search}`)
+			.then(res => res.json())
+			.then(data => setStockData(data))
 	}
-	render() {
-		if (this.state == null) return <div>Loading...</div>
-		return <Chart type="svg" data={this.state.data} />
-	}
+
+	// When website first launches, grab this stock to show something.
+	useEffect(() => {
+		setTimeout(() => { // Simulate lag.
+			fetchStock("MSFT")
+		}, 1500)
+	}, [])
+
+	return (
+		<>
+			<Header />
+			<Intro fetchStock={fetchStock} />
+			<div id="main-stock-container">
+				{!stockData && <StockLoading />}
+				{stockData && <StockChart stockData={stockData} />}
+				{stockData && <StockInfo stockData={stockData} />}
+			</div>
+		</>
+	)
 }
 
 // Render the app components.
-ReactDOM.render(
-	<>
-		<Header />
-		<div id="container">
-			<ChartComponent stockID="TRCY" stockCompany="TOTALLY REAL COMPANY" />
-			<PredictionsContainer accuracy={Math.floor(Math.random() * 100)} />
-		</div>
-		<Footer />
-	</>,
-	document.querySelector("#root")
-)
+ReactDOM.render(<App />, document.querySelector("#root"))

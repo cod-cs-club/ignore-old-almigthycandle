@@ -1,0 +1,17 @@
+#stock-loading-container { margin: 20px 0 0 0; }
+
+#stock-loading-container img {
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+#stock-loading-container h2 {
+    margin: 40px 0;
+    font-weight: normal;
+    font-size: 42px;
+    text-align: center;
+    letter-spacing: 4px;
+    color: rgb(156, 156, 156);
+}

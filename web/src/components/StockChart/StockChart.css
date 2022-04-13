@@ -1,0 +1,12 @@
+#chart-container {
+    width: 850px; /* Same in Chart.js */
+}
+
+#chart-container h2 {
+    margin: 0 0 20px 0;
+    padding: 0;
+    font-size: 32px;
+    font-weight: normal;
+    letter-spacing: 5px;
+    color: rgb(163, 163, 163);
+}
