@@ -1,6 +1,7 @@
 # almigthycandle
 
 almightycandle.com is an AI one-page website application.
+* We use discord for Communication, link: https://discord.gg/uzBEgApK9K.
 
 ![1](https://user-images.githubusercontent.com/67660328/181349695-b383d5fc-3dd3-4013-9052-a1ea8371b637.png)
 ![2](https://user-images.githubusercontent.com/67660328/181349716-454a0127-1d44-4ff9-b329-1c862e8ce05b.png)
