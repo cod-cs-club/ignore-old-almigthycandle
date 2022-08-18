@@ -5,8 +5,8 @@ function Intro({fetchStock}) {
     return (
         <main>
             <section>
-                <h2>Hi, I'm Alca!<br />Let's Predicts a Stock.</h2>
-                <p>Almigthycandle.com hosts me, I am an AI that computes Stock's historical data and predicts if it's price is going to go up or down the next day.</p>
+                <h2>Hi, I'm Alca!<br />Let's Predict a Stock.</h2>
+                <p>Almigthycandle.com hosts me, I am an AI that computes a stock's historical data and predicts if it's price is going to go up or down the next day.</p>
                 <div id="search-container">
                     <div id="search-input-container">
                         <input type="text" placeholder="Search stock.." />
