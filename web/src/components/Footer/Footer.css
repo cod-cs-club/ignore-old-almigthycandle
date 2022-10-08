@@ -1,0 +1,30 @@
+footer{
+    display: flex;
+    justify-content: center;
+    background-color: rgb(235, 235, 235);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 145px;
+    width: 100%;
+    border-top: 1px solid black;
+  }
+.containerFooter{
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+    font-family: Verdana;
+    color: rgb(59, 59, 59);
+    letter-spacing: 3px;
+}
+
+#gitHubIcon{
+    max-width: 8%;
+    height:auto;
+    display: block;
+    margin: 0 auto;
+}
+
+#gitHubIcon:hover{
+    opacity: 50%;
+}

@@ -1,0 +1,56 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 30px;
+    border-bottom: 1px solid rgb(59, 59, 59);
+    background-color: rgb(20, 20, 38);
+    border-bottom: 1px solid rgb(47, 47, 47);
+}
+
+header h1 {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+    font-size: 30px;
+    letter-spacing: 4px;
+    color: rgb(219, 219, 219);
+}
+
+header ul { margin: auto 0; list-style: none; }
+header ul li { display: inline; }
+
+header ul li a {
+    font-size: 18px;
+    margin: 0 5px;
+    color: rgb(219, 219, 219);
+    padding: 20px 20px;
+    border-radius: 0;
+    transition: 300ms;
+}
+
+header ul li a:hover {
+    color: rgb(255, 255, 255);
+    background-color: rgb(149, 0, 134);
+    border: none;
+    border-radius: 10px;
+}
+
+header ul li .selected {
+    color: rgb(245, 245, 245);
+    border-bottom: 1px solid rgb(183, 183, 183);
+    border-radius: 2px;
+}
+
+header button {
+    margin: auto 0;
+    padding: 0.5em 1em;
+    font-size: 20px;
+    color: white;
+    background-color: rgb(0, 203, 24);
+    border: 1px solid rgb(0, 192, 22);
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    cursor: pointer;
+}
+
+header a { text-decoration: none; color: inherit; }

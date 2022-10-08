@@ -1,21 +1,25 @@
-# YT Video: https://www.youtube.com/watch?v=PuZY9q-aKLw&t=957s&ab_channel=NeuralNine
-# Imports for our Projects
+# Flask Back End
+# use "flask run"
 
-import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
-import pandas_datareader as web
-import datetime as dt
-
-from sklearn.preprocessing import MinMaxScaler
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Dropout, LSTM
-
-from flask import Flask
+from flask_cors import CORS
+from flask import Flask, request
+from main import predict_future_prices
 
 app = Flask(__name__)
+CORS(app)
 
-@app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
+@app.route("/predict-future-price")
+def predict_future_price():
+    symbol = request.args.get('symbol')
+    if not symbol:
+        return {'error': 'symbol parameter was missing'}
 
+    # price_prediction is a Dataframe object, this converts it to a normal python dict
+    price_prediction = predict_future_prices(symbol) \
+                .reset_index() \
+                .rename(columns={'index': 'time'}) \
+                .to_dict('records')
+
+    return {
+        'prices': price_prediction
+    }
